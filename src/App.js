@@ -6,6 +6,8 @@ import uuid from "react-uuid";
 
 
 function App() {
+  
+  
   const [notes, setNotes] = useState(
     localStorage.notes ? JSON.parse(localStorage.notes) : []
   );
@@ -20,7 +22,7 @@ function App() {
       id: uuid(),
       title:"Untitled",
       body:"",
-      lastModified: Date.now(),
+      LastModified: Date.now(),
     };
 
     setNotes([newNote, ...notes]);
