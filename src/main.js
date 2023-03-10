@@ -11,20 +11,31 @@ const Main = ({ activeNote, onUpdateNote }) => {
     onUpdateNote({
       ...activeNote,
       [key]: value,
-      lastModified: Date.now(),
+      LastModified: Date.now(),
     });
   };
-
   const toggleBold = () => {
-    setIsBold(!isBold);
+    const selection = window.getSelection().toString();
+    if (selection) {
+      const newBody = activeNote.body.replace(selection, `**${selection}**`);
+      onEditField("body", newBody);
+    }
   };
 
   const toggleItalic = () => {
-    setIsItalic(!isItalic);
+    const selection = window.getSelection().toString();
+    if (selection) {
+      const newBody = activeNote.body.replace(selection, `*${selection}*`);
+      onEditField("body", newBody);
+    }
   };
 
   const toggleUnderline = () => {
-    setIsUnderline(!isUnderline);
+    const selection = window.getSelection().toString();
+    if (selection) {
+      const newBody = activeNote.body.replace(selection, `<u>${selection}</u>`);
+      onEditField("body", newBody);
+    }
   };
 
   const handleSave = () => {
@@ -38,7 +49,6 @@ const Main = ({ activeNote, onUpdateNote }) => {
 
   if (!activeNote)
     return <div className="no-active-note">Select a note, or create a new one.</div>;
-
   const formatDate = (timestamp) => {
     const options = {
       month: "long",
@@ -75,7 +85,7 @@ const Main = ({ activeNote, onUpdateNote }) => {
           onChange={(e) => onEditField("title", e.target.value)}
           autoFocus
         />
-        <p className="note-date">{formatDate(activeNote.lastModified)}</p>
+        <p className="note-date">{formatDate(activeNote.LastModified)}</p>
         <div className="format-buttons">
           <button onClick={toggleBold}>
             <strong>B</strong>

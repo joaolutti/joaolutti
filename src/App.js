@@ -6,8 +6,6 @@ import uuid from "react-uuid";
 
 
 function App() {
-  
-  
   const [notes, setNotes] = useState(
     localStorage.notes ? JSON.parse(localStorage.notes) : []
   );
